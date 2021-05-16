@@ -1,3 +1,10 @@
+GIT
+  remote: http://github.com/thiagolima86/validates_cpf_cnpj
+  revision: 1dacf8c13412f4dfdd728d0de36322f6aa73bd2a
+  specs:
+    validates_cpf_cnpj (0.2.5)
+      activemodel (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -214,6 +221,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
+  validates_cpf_cnpj!
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
