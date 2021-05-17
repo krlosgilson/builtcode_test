@@ -8,4 +8,16 @@ module ApplicationHelper
     ]
   end
 
+  def date_br date
+    date.strftime("%d/%m/%Y")
+  end
+
+  def time_br time
+    time.strftime("%H:%M:%S")
+  end
+
+  def cpf_formated cpf
+    "#{cpf[0,3]}.#{cpf[3,3]}.#{cpf[6,3]}-#{cpf[9,2]}"
+  end
+
 end
