@@ -10,22 +10,6 @@ class Appointment < ApplicationRecord
     self.ends_at = starts_at + duration
   end
 
-  def starts_at_date
-    starts_at.strftime("%d/%m/%Y")
-  end
-  
-  def starts_at_time
-    starts_at.strftime("%H:%M:%S")
-  end
-
-  def ends_at_date
-    ends_at.strftime("%d/%m/%Y")
-  end
-  
-  def ends_at_time
-    ends_at.strftime("%H:%M:%S")
-  end
-  
   def self.allowed_times
     [
       { starts_at: '09:00:00', ends_at: '09:30:00' },
@@ -50,7 +34,9 @@ class Appointment < ApplicationRecord
   private
 
     def validate_allowed_times
-      if !Appointment.allowed_times.select{ |t| t[:starts_at] == starts_at_time }[0].present?
+      starts_at_time = starts_at.strftime("%H:%M:%S")
+
+      if !Appointment.allowed_times.select{ |t| t[:starts_at] == starts_at_time }.present?
         errors.add(:base, "Horário não cadastrado para consultas.")
         throw :abort
       end
