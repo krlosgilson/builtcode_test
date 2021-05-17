@@ -1,13 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Patients</h1>
+<h1>Pacientes</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Birth date</th>
-      <th>Cpf</th>
+      <th>Nome</th>
+      <th>Data Nasc</th>
+      <th>CPF</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,12 +13,12 @@
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
-        <td><%= patient.name %></td>
-        <td><%= patient.birth_date %></td>
-        <td><%= patient.cpf %></td>
-        <td><%= link_to 'Show', patient %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= patient.name.titleize %></td>
+        <td><%= date_br patient.birth_date %></td>
+        <td><%= cpf_formated patient.cpf %></td>
+        <td><%= link_to 'Mostrar', patient %></td>
+        <td><%= link_to 'Editar', edit_patient_path(patient) %></td>
+        <td><%= link_to 'Excluir', patient, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Patient', new_patient_path %>
+<%= link_to 'Novo Paciente', new_patient_path %>

@@ -1,19 +1,17 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Name:</strong>
-  <%= @patient.name %>
+  <strong>Nome:</strong>
+  <%= @patient.name.titleize %>
 </p>
 
 <p>
-  <strong>Birth date:</strong>
-  <%= @patient.birth_date %>
+  <strong>Data Nascimento:</strong>
+  <%= date_br @patient.birth_date %>
 </p>
 
 <p>
-  <strong>Cpf:</strong>
-  <%= @patient.cpf %>
+  <strong>CPF:</strong>
+  <%= cpf_formated @patient.cpf %>
 </p>
 
-<%= link_to 'Edit', edit_patient_path(@patient) %> |
-<%= link_to 'Back', patients_path %>
+<%= link_to 'Editar', edit_patient_path(@patient) %> |
+<%= link_to 'Voltar', patients_path %>
