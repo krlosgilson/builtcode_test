@@ -8,9 +8,13 @@ class Doctor < ApplicationRecord
   
   before_validation do
     crm_uf.upcase!
-  end  
+  end
 
   before_destroy :check_for_appointments, prepend: true
+
+  def crm_complete
+    "#{crm} - #{crm_uf}"
+  end
 
   private
 

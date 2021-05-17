@@ -1,7 +1,7 @@
 <%= form_with(model: doctor) do |form| %>
   <% if doctor.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(doctor.errors.count, "error") %> prohibited this doctor from being saved:</h2>
+      <h2><%= pluralize(doctor.errors.count, "error") %> ao tentar salvar:</h2>
 
       <ul>
         <% doctor.errors.each do |error| %>
@@ -12,21 +12,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, "Nome" %>
+    <%= form.text_field :name, maxlength: 100, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :crm %>
-    <%= form.text_field :crm %>
+    <%= form.label :crm, "CRM" %>
+    <%= form.text_field :crm, maxlength: 20, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :crm_uf %>
-    <%= form.text_field :crm_uf %>
+    <%= form.label :crm_uf, "UF" %>
+    <%= form.select :crm_uf, select_uf, {include_blank: "Selecione..."} %>
   </div>
+
+  <br>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Salvar" %>
   </div>
 <% end %>
