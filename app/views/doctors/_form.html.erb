@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, "Nome" %>
+    <%= form.label :name, "Nome *" %>
     <%= form.text_field :name, maxlength: 100, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :crm, "CRM" %>
+    <%= form.label :crm, "CRM *" %>
     <%= form.text_field :crm, maxlength: 20, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :crm_uf, "UF" %>
-    <%= form.select :crm_uf, select_uf, {include_blank: "Selecione..."} %>
+    <%= form.label :crm_uf, "UF do CRM *" %>
+    <%= form.select :crm_uf, select_uf, {include_blank: "Selecione..."}, required: true %>
   </div>
 
   <br>
