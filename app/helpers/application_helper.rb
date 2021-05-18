@@ -2,10 +2,10 @@ module ApplicationHelper
 
   def select_uf
     [
-      ["AC","AC"],["AL","AL"],["AM","AM"],["AP","AP"],["BA","BA"],["CE","CE"],["DF","DF"],["ES","ES"],["GO","GO"],
-      ["MA","MA"],["MG","MG"],["MS","MS"],["MT","MT"],["PA","PA"],["PB","PB"],["PE","PE"],["PI","PI"],["PR","PR"],
-      ["RJ","RJ"],["RN","RN"],["RO","RO"],["RR","RR"],["RS","RS"],["SC","SC"],["SE","SE"],["SP","SP"],["TO","TO"]
+      "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA",
+      "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"
     ]
+    .map{ |uf| [uf, uf] }
   end
 
   def date_br date
@@ -14,6 +14,10 @@ module ApplicationHelper
 
   def time_br time
     time.strftime("%H:%M:%S")
+  end
+
+  def time_short_br time
+    time.strftime("%H:%M")
   end
 
   def cpf_formated cpf
