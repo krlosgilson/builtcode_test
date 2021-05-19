@@ -3,7 +3,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments or /appointments.json
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.order(:starts_at)
   end
 
   # GET /appointments/1 or /appointments/1.json
@@ -22,6 +22,7 @@ class AppointmentsController < ApplicationController
   # POST /appointments or /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
+    @appointment.starts_at = starts_at_from_params
 
     respond_to do |format|
       if @appointment.save
@@ -37,6 +38,8 @@ class AppointmentsController < ApplicationController
   # PATCH/PUT /appointments/1 or /appointments/1.json
   def update
     respond_to do |format|
+      @appointment.starts_at = starts_at_from_params
+
       if @appointment.update(appointment_params)
         format.html { redirect_to @appointment, flash: { notice: "Consulta atualizada com sucesso." } }
         format.json { render :show, status: :ok, location: @appointment }
@@ -62,6 +65,23 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def get_allowed_times_availables
+    array = []
+
+    if params[:date].present?
+      date = params[:date].to_date
+      allowed_times   = Appointment.allowed_times
+      ocuppied_times  = Appointment.where("starts_at BETWEEN ? AND ?", date.beginning_of_day, date.end_of_day).order(:starts_at)
+      ocuppied_times  = ocuppied_times.map { |i| i.starts_at_time_formatted }
+      available_times = allowed_times.select { |i| !ocuppied_times.include? i[:starts_at] }
+      available_times.each do |i|
+        array << {:value => i[:starts_at], :description => i[:starts_at]}
+      end
+    end
+
+    render :json => array.to_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_appointment
@@ -71,5 +91,9 @@ class AppointmentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def appointment_params
       params.require(:appointment).permit(:starts_at, :patient_id, :doctor_id)
+    end
+
+    def starts_at_from_params
+      "#{params[:appointment_date]} #{params[:appointment_time]}".to_datetime
     end
 end

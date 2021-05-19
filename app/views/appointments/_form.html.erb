@@ -1,7 +1,7 @@
 <%= form_with(model: appointment) do |form| %>
   <% if appointment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+      <h2><%= pluralize(appointment.errors.count, "error") %> ao tentar salvar:</h2>
 
       <ul>
         <% appointment.errors.each do |error| %>
@@ -12,26 +12,73 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :starts_at %>
-    <%= form.datetime_select :starts_at %>
+    <%= label_tag "appointment_date", "Data" %>
+    <%= date_field_tag "appointment_date", @appointment.starts_at_date, {class: "form-control", required: true} %>
   </div>
 
   <div class="field">
-    <%= form.label :ends_at %>
-    <%= form.datetime_select :ends_at %>
+    <%= label_tag "appointment_time", "Horário" %>
+    <% if @appointment.new_record? %>
+      <%= select_tag "appointment_time", "", {include_blank: "selecione...", class: "form-control", required: true} %>
+    <% else %>
+      <%= time_field_tag "appointment_time", @appointment.starts_at_time_formatted, {step: 1, class: "form-control", required: true} %>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= form.label :patient_id %>
-    <%= form.text_field :patient_id %>
+    <%= form.label :doctor_id, "Médico" %>
+    <%= form.select :doctor_id, select_doctor, {include_blank: "selecione..."}, {class: "form-control", required: true} %>
   </div>
 
   <div class="field">
-    <%= form.label :doctor_id %>
-    <%= form.text_field :doctor_id %>
+    <%= form.label :patient_id, "Paciente" %>
+    <%= form.select :patient_id, select_patient, {include_blank: "selecione..."}, {class: "form-control", required: true} %>
   </div>
+
+  <br>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Salvar" %>
   </div>
 <% end %>
+
+<script>
+  var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', url, true)
+    xhr.responseType = 'json'
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response)
+      } else {
+        callback(status, xhr.response)
+      }
+    }
+    xhr.send()
+  }
+
+  document.getElementById('appointment_date').addEventListener('change', (event) => {
+    let params = `?date=${event.target.value}`
+    getJSON(`/get_appointment_allowed_times_availables${params}`,
+    function(err, data) {
+      if (err !== null) {
+        alert('Algo deu errado: ' + err)
+      } else {
+        let dropdown = document.getElementById('appointment_time')
+        dropdown.length = 0
+        let defaultOption = document.createElement('option')
+        defaultOption.text = 'selecione...'
+        dropdown.add(defaultOption)
+        dropdown.selectedIndex = 0
+
+        data.forEach(function(item) {
+          option = document.createElement('option')
+          option.text = item.description
+          option.value = item.value
+          dropdown.add(option)
+        })
+      }
+    })  
+  })
+</script>

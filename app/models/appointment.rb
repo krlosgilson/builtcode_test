@@ -2,7 +2,7 @@ class Appointment < ApplicationRecord
   belongs_to :patient
   belongs_to :doctor
 
-  validates :starts_at, presence: true, uniqueness: { message: "já existe uma consulta marcada." }
+  validates :starts_at, presence: true, uniqueness: { message: 'já existe uma consulta marcada.' }
   validates :ends_at, presence: true
 
   before_validation do
@@ -31,13 +31,27 @@ class Appointment < ApplicationRecord
     ]
   end
 
+  def starts_at_date
+    starts_at&.to_date
+  end
+
+  def starts_at_date_formatted
+    starts_at_date&.strftime('%d/%m/%Y')
+  end
+
+  def starts_at_time
+    starts_at&.to_time
+  end
+
+  def starts_at_time_formatted
+    starts_at_time&.strftime('%H:%M:%S')
+  end
+
   private
 
     def validate_allowed_times
-      starts_at_time = starts_at.strftime("%H:%M:%S")
-
-      if !Appointment.allowed_times.select{ |t| t[:starts_at] == starts_at_time }.present?
-        errors.add(:base, "Horário não cadastrado para consultas.")
+      if !Appointment.allowed_times.select{ |t| t[:starts_at] == starts_at_time_formatted }.present?
+        errors.add(:base, 'Horário não cadastrado para consultas.')
         throw :abort
       end
     end
