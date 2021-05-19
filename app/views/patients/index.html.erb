@@ -15,7 +15,7 @@
       <tr>
         <td><%= patient.name.titleize %></td>
         <td><%= date_br patient.birth_date %></td>
-        <td><%= cpf_formated patient.cpf %></td>
+        <td><%= cpf_formatted patient.cpf %></td>
         <td><%= link_to 'Mostrar', patient %></td>
         <td><%= link_to 'Editar', edit_patient_path(patient) %></td>
         <td><%= link_to 'Excluir', patient, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>

@@ -20,7 +20,7 @@ module ApplicationHelper
     time.strftime("%H:%M")
   end
 
-  def cpf_formated cpf
+  def cpf_formatted cpf
     "#{cpf[0,3]}.#{cpf[3,3]}.#{cpf[6,3]}-#{cpf[9,2]}"
   end
 
