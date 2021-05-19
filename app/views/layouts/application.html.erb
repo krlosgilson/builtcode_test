@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    <h1>Builtcode Test</h1>
+    <ul>
+      <li><%= link_to "Médicos", doctors_path %></li>
+      <li><%= link_to "Pacientes", patients_path %></li>
+      <li><%= link_to "Consultas", appointments_path %></li>
+    </ul>
+
     <% flash.each do |message_type, message| %>
       <div id=<%= "flash_#{message_type}" %> class="alert"><%= message %></div>
     <% end %>
