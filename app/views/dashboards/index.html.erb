@@ -13,29 +13,29 @@
 <p><strong>Pacientes atendidos: </strong><span id="patients_attended"></span></p>
 
 <script>
-  let select_doctor = document.getElementById('select_doctor')
-  select_doctor.addEventListener('change', (e) => {
-    let params = `?doctor_id=${e.target.value}`
-    getJSON(`/get_appointments_realized_by_doctor${params}`,
-    function(err, data) {
-      if (err !== null) {
-        alert('Algo deu errado: ' + err)
-      } else {
-        document.getElementById('appointments_realized').innerHTML = data.length
-      }
+  (function(){
+    let select_doctor = document.getElementById('select_doctor')
+    select_doctor.addEventListener('change', (e) => {
+      let params = `?doctor_id=${e.target.value}`
+      getJSON(`/get_appointments_realized_by_doctor${params}`,
+      function(err, data) {
+        if (err !== null) {
+          alert('Algo deu errado: ' + err)
+        } else {
+          document.getElementById('appointments_realized').innerHTML = data.length
+        }
+      })
+      getJSON(`/get_patients_attended_count_by_doctor${params}`,
+      function(err, data) {
+        if (err !== null) {
+          alert('Algo deu errado: ' + err)
+        } else {
+          document.getElementById('patients_attended').innerHTML = data
+        }
+      })
     })
-    getJSON(`/get_patients_attended_count_by_doctor${params}`,
-    function(err, data) {
-      if (err !== null) {
-        alert('Algo deu errado: ' + err)
-      } else {
-        document.getElementById('patients_attended').innerHTML = data
-      }
-    })
-  })
 
-  document.addEventListener("DOMContentLoaded", function(){
     let e = new Event('change')
     select_doctor.dispatchEvent(e)
-  })
+  })()
 </script>
