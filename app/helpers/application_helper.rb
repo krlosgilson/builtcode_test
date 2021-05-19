@@ -1,5 +1,17 @@
 module ApplicationHelper
 
+  def breadcrumbs crumbs={}
+    html  = '<nav class="nav_custom">'
+    html << '  <div class="nav-wrapper">'
+    html << '    <div class="col s12">'
+    html << '      <a href="/" class="breadcrumb breadcrumb_custom">Dashboard</a>'
+    crumbs.map { |k,v| html << "<a href=\"#{v.nil? ? "#" : v}\" class=\"breadcrumb breadcrumb_custom\">#{k}</a>" }
+    html << '    </div>'
+    html << '  </div>'
+    html << '</nav>'
+    html.html_safe
+  end
+
   def select_uf
     [
       "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA",
