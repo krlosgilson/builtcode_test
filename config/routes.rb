@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root :to => "dashboards#index"
+  match '/dashboard' => 'dashboards#index', via: [:get]
+
   resources :appointments
   match '/get_appointment_allowed_times_availables' =>
         'appointments#get_allowed_times_availables', via: [:get]
