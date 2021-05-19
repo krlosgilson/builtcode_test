@@ -14,6 +14,11 @@
  *= require_self
  */
 
+ @import 'materialize-css/sass/components/color-variables';
+ $primary-color: color("blue", "lighten-2") !default;
+ $secondary-color: color("blue", "base") !default;
+ @import 'materialize-css/sass/materialize';
+
  #flash_info {
   color: cornflowerblue; }
 
