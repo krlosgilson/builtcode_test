@@ -1,21 +1,27 @@
 <%= breadcrumbs({"Pacientes": patients_path, "Mostrar": nil}) %>
 
-<h1>Paciente #<%= @patient.id %></h1>
+<h4>Paciente #<%= @patient.id %></h4>
 
-<p>
+<br>
+
+<div class="row">
   <strong>Nome:</strong>
   <%= @patient.name.titleize %>
-</p>
+</div>
 
-<p>
+<div class="row">
   <strong>Data Nascimento:</strong>
   <%= date_br @patient.birth_date %>
-</p>
+</div>
 
-<p>
+<div class="row">
   <strong>CPF:</strong>
   <%= cpf_formatted @patient.cpf %>
-</p>
+</div>
 
-<%= link_to 'Editar', edit_patient_path(@patient) %> |
-<%= link_to 'Voltar', patients_path %>
+<br>
+
+<div class="row">
+  <%= link_to_back patients_path %>
+  <%= link_to_edit edit_patient_path(@patient) %>
+</div>

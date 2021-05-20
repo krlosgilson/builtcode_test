@@ -1,0 +1,18 @@
+(function(){
+  M.updateTextFields()
+  
+  let autocompletes = document.querySelectorAll('.autocomplete')
+  M.Autocomplete.init(autocompletes, {})
+
+  let chips = document.querySelectorAll('.chips')
+  M.Chips.init(chips, {})
+
+  let datepickers = document.querySelectorAll('.datepicker')
+  M.Datepicker.init(datepickers, {})
+
+  let timepickers = document.querySelectorAll('.timepicker')
+  M.Timepicker.init(timepickers, {})
+
+  let selects = document.querySelectorAll('select')
+  M.FormSelect.init(selects, {})
+})()

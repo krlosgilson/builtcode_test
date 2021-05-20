@@ -1,8 +1,5 @@
 <%= breadcrumbs({"Consultas": appointments_path, "Editar": nil}) %>
 
-<h1>Editar Consulta #<%= @appointment.id %></h1>
+<h4>Editar Consulta #<%= @appointment.id %></h4>
 
 <%= render 'form', appointment: @appointment %>
-
-<%= link_to 'Mostrar', @appointment %> |
-<%= link_to 'Voltar', appointments_path %>

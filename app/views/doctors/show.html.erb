@@ -1,16 +1,22 @@
 <%= breadcrumbs({"Médicos": doctors_path, "Mostrar": nil}) %>
 
-<h1>Médico #<%= @doctor.id %></h1>
+<h4>Médico #<%= @doctor.id %></h4>
 
-<p>
+<br>
+
+<div class="row">
   <strong>Nome:</strong>
   <%= @doctor.name.titleize %>
-</p>
+</div>
 
-<p>
+<div class="row">
   <strong>CRM:</strong>
   <%= @doctor.crm_complete %>
-</p>
+</div>
 
-<%= link_to 'Editar', edit_doctor_path(@doctor) %> |
-<%= link_to 'Voltar', doctors_path %>
+<br>
+
+<div class="row">
+  <%= link_to_back doctors_path %>
+  <%= link_to_edit edit_doctor_path(@doctor) %>
+</div>

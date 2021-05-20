@@ -1,34 +1,35 @@
 <%= form_with(model: doctor) do |form| %>
-  <% if doctor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(doctor.errors.count, "error") %> ao tentar salvar:</h2>
+  <%= show_form_errors doctor %>
 
-      <ul>
-        <% doctor.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="row">
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :name, "Nome *", class: "active" %>
+        <%= form.text_field :name, maxlength: 100, required: true %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name, "Nome *" %>
-    <%= form.text_field :name, maxlength: 100, required: true %>
-  </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :crm, "CRM *", class: "active" %>
+        <%= form.text_field :crm, maxlength: 20, required: true %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :crm, "CRM *" %>
-    <%= form.text_field :crm, maxlength: 20, required: true %>
-  </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :crm_uf, "UF do CRM *", class: "active" %>
+        <%= form.select :crm_uf, select_uf, {include_blank: "Selecione..."}, required: true %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :crm_uf, "UF do CRM *" %>
-    <%= form.select :crm_uf, select_uf, {include_blank: "Selecione..."}, required: true %>
-  </div>
-
-  <br>
-
-  <div class="actions">
-    <%= form.submit "Salvar" %>
+    <div class="row">
+      <%= link_to_back doctors_path %>
+      <%= button_to_submit %>
+    </div>
   </div>
 <% end %>
+
+<script>
+  <%= render 'materialize' %>
+</script>

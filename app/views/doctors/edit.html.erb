@@ -1,8 +1,5 @@
 <%= breadcrumbs({"Médicos": doctors_path, "Editar": nil}) %>
 
-<h1>Editar Médico #<%= @doctor.id %></h1>
+<h4>Editar Médico #<%= @doctor.id %></h4>
 
 <%= render 'form', doctor: @doctor %>
-
-<%= link_to 'Mostrar', @doctor %> |
-<%= link_to 'Voltar', doctors_path %>

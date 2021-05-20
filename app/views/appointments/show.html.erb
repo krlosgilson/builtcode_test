@@ -1,26 +1,32 @@
 <%= breadcrumbs({"Consultas": appointments_path, "Mostrar": nil}) %>
 
-<h1>Consulta #<%= @appointment.id %></h1>
+<h4>Consulta #<%= @appointment.id %></h4>
 
-<p>
+<br>
+
+<div class="row">
   <strong>Data:</strong>
   <%= date_br @appointment.starts_at %>
-</p>
+</div>
 
-<p>
+<div class="row">
   <strong>Horário:</strong>
   <%= starts_and_end_time @appointment %>
-</p>
+</div>
 
-<p>
+<div class="row">
   <strong>Médico:</strong>
   <%= link_to @appointment.doctor.name.titleize, @appointment.doctor %>
-</p>
+</div>
 
-<p>
+<div class="row">
   <strong>Paciente:</strong>
   <%= link_to @appointment.patient.name.titleize, @appointment.patient %>
-</p>
+</div>
 
-<%= link_to 'Editar', edit_appointment_path(@appointment) %> |
-<%= link_to 'Voltar', appointments_path %>
+<br>
+
+<div class="row">
+  <%= link_to_back appointments_path %>
+  <%= link_to_edit edit_appointment_path(@appointment) %>
+</div>

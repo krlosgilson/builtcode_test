@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
-    <title>Builtcode</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Builtcode Test</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <h1>Builtcode Test</h1>
-    <ul>
-      <li><%= link_to "Médicos", doctors_path %></li>
-      <li><%= link_to "Pacientes", patients_path %></li>
-      <li><%= link_to "Consultas", appointments_path %></li>
-    </ul>
+    <div class="container">
+      <%= render 'menu' %>
 
-    <% flash.each do |message_type, message| %>
-      <div id=<%= "flash_#{message_type}" %> class="alert"><%= message %></div>
-    <% end %>
+      <% flash.each do |message_type, message| %>
+        <div id=<%= "flash_#{message_type}" %> class="alert"><%= message %></div>
+      <% end %>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>

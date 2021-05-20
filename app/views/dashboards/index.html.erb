@@ -1,11 +1,36 @@
-<%= breadcrumbs({}) %>
+<h4>Dashboard</h4>
 
-<h2>Dashboard</h2>
+<br>
 
-<%= label_tag :select_doctor, "Médico" %>
-<%= select_tag :select_doctor, options_for_select(select_doctor), {include_blank: "Todos os médicos", class: "form-control"} %>
-<p><strong>Consultas realizadas: </strong><span id="appointments_realized"></span></p>
-<p><strong>Pacientes atendidos: </strong><span id="patients_attended"></span></p>
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card white darken-1">
+      <div class="card-panel white">
+        <span class="card-title">Médicos</span>
+        <div class="input-field">
+          <%= select_tag :select_doctor, options_for_select(select_doctor), {include_blank: "Todos os médicos"} %>
+        </div>
+        <br>
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header teal-text">
+              <i class="material-icons">query_stats</i>
+              Consultas realizadas
+              <span class="badge" id="appointments_realized"></span>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header teal-text">
+              <i class="material-icons">people</i>
+              Pacientes atendidos
+              <span class="badge" id="patients_attended"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   (function(){
@@ -28,6 +53,8 @@
           document.getElementById('patients_attended').innerHTML = data
         }
       })
+
+      M.FormSelect.init(select_doctor, {})
     })
 
     let e = new Event('change')

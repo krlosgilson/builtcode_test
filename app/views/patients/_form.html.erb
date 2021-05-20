@@ -1,34 +1,35 @@
 <%= form_with(model: patient) do |form| %>
-  <% if patient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(patient.errors.count, "error") %> ao tentar salvar:</h2>
+  <%= show_form_errors patient %>
 
-      <ul>
-        <% patient.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="row">
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :name, "Nome *", class: "active" %>
+        <%= form.text_field :name, maxlength: 100, required: true %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name, "Nome *".html_safe %>
-    <%= form.text_field :name, maxlength: 100, required: true %>
-  </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :birth_date, "Data Nascimento *", class: "active" %>
+        <%= form.date_field :birth_date, required: true %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :birth_date, "Data Nascimento *" %>
-    <%= form.date_field :birth_date, required: true %>
-  </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :cpf, "CPF * <small>(somente números)</small>".html_safe, class: "active" %>
+        <%= form.text_field :cpf, maxlength: 11, required: true %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :cpf, "CPF * <small>(somente números)</small>".html_safe %>
-    <%= form.text_field :cpf, maxlength: 11, required: true %>
-  </div>
-
-  <br>
-
-  <div class="actions">
-    <%= form.submit "Salvar" %>
+    <div class="row">
+      <%= link_to_back patients_path %>
+      <%= button_to_submit %>
+    </div>
   </div>
 <% end %>
+
+<script>
+  <%= render 'materialize' %>
+</script>

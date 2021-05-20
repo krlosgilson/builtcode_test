@@ -1,0 +1,14 @@
+<ul id="slide-out" class="sidenav sidenav-fixed">
+  <li>
+    <div class="user-view">
+      <div class="background"><%= image_tag 'logo.jpg' %></div>
+      <i class="material-icons circle medium">account_circle</i>
+      <a href="#!"><span class="teal-text">User | </span></a>
+      <a href="#!"><span class="teal-text">user@domain.com</span></a>
+    </div>
+  </li>
+  <li><a href="/"><i class="material-icons">home</i>Dashboard</a></li>
+  <li><%= link_to '<i class="material-icons">medical_services</i>Médicos'.html_safe, doctors_path %></li>
+  <li><%= link_to '<i class="material-icons">people</i>Pacientes'.html_safe, patients_path %></li>
+  <li><%= link_to '<i class="material-icons">query_stats</i>Consultas'.html_safe, appointments_path %></li>
+</ul>

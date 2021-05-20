@@ -1,3 +1,8 @@
+(function(){
+  let sidenavs = document.querySelectorAll('.sidenav')
+  M.Sidenav.init(sidenavs, {})
+})()
+
 getJSON = function(url, callback) {
   var xhr = new XMLHttpRequest()
   xhr.open('GET', url, true)

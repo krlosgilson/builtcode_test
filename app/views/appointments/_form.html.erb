@@ -1,69 +1,76 @@
 <%= form_with(model: appointment) do |form| %>
-  <% if appointment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(appointment.errors.count, "error") %> ao tentar salvar:</h2>
+  <%= show_form_errors appointment %>
 
-      <ul>
-        <% appointment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="row">
+    <div class="row">
+      <div class="input-field col s12">
+        <%= label_tag "appointment_date", "Data", class: "active" %>
+        <%= date_field_tag "appointment_date", @appointment.starts_at_date, {required: true} %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= label_tag "appointment_date", "Data" %>
-    <%= date_field_tag "appointment_date", @appointment.starts_at_date, {class: "form-control", required: true} %>
-  </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= label_tag "appointment_time", "Horário", class: "active" %>
+        <% if @appointment.new_record? %>
+          <%= select_tag "appointment_time", "", {include_blank: "selecione...", required: true} %>
+        <% else %>
+          <%= time_field_tag "appointment_time", @appointment.starts_at_time_formatted, {step: 1, required: true} %>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= label_tag "appointment_time", "Horário" %>
-    <% if @appointment.new_record? %>
-      <%= select_tag "appointment_time", "", {include_blank: "selecione...", class: "form-control", required: true} %>
-    <% else %>
-      <%= time_field_tag "appointment_time", @appointment.starts_at_time_formatted, {step: 1, class: "form-control", required: true} %>
-    <% end %>
-  </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :doctor_id, "Médico", class: "active" %>
+        <%= form.select :doctor_id, select_doctor, {include_blank: "selecione..."}, {required: true} %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :doctor_id, "Médico" %>
-    <%= form.select :doctor_id, select_doctor, {include_blank: "selecione..."}, {class: "form-control", required: true} %>
-  </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= form.label :patient_id, "Paciente", class: "active" %>
+        <%= form.select :patient_id, select_patient, {include_blank: "selecione..."}, {required: true} %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :patient_id, "Paciente" %>
-    <%= form.select :patient_id, select_patient, {include_blank: "selecione..."}, {class: "form-control", required: true} %>
-  </div>
-
-  <br>
-
-  <div class="actions">
-    <%= form.submit "Salvar" %>
+    <div class="row">
+      <%= link_to_back appointments_path %>
+      <%= button_to_submit %>
+    </div>
   </div>
 <% end %>
 
 <script>
-  document.getElementById('appointment_date').addEventListener('change', (event) => {
-    let params = `?date=${event.target.value}`
-    getJSON(`/get_appointment_allowed_times_availables${params}`,
-    function(err, data) {
-      if (err !== null) {
-        alert('Algo deu errado: ' + err)
-      } else {
-        let dropdown = document.getElementById('appointment_time')
-        dropdown.length = 0
-        let defaultOption = document.createElement('option')
-        defaultOption.text = 'selecione...'
-        dropdown.add(defaultOption)
-        dropdown.selectedIndex = 0
-
-        data.forEach(function(item) {
-          option = document.createElement('option')
-          option.text = item.description
-          option.value = item.value
-          dropdown.add(option)
-        })
-      }
-    })  
-  })
+  <%= render 'materialize' %>
 </script>
+
+<% if @appointment.new_record? %>
+  <script>
+    document.getElementById('appointment_date').addEventListener('change', (e) => {
+      let params = `?date=${e.target.value}`
+      getJSON(`/get_appointment_allowed_times_availables${params}`,
+      function(err, data) {
+        if (err !== null) {
+          alert('Algo deu errado: ' + err)
+        } else {
+          let dropdown = document.getElementById('appointment_time')
+          dropdown.length = 0
+          let defaultOption = document.createElement('option')
+          defaultOption.text = 'selecione...'
+          dropdown.add(defaultOption)
+          dropdown.selectedIndex = 0
+
+          data.forEach(function(item) {
+            option = document.createElement('option')
+            option.text = item.description
+            option.value = item.value
+            dropdown.add(option)
+          })
+
+          M.FormSelect.init(dropdown, {})
+        }
+      })  
+    })
+  </script>
+<% end %>

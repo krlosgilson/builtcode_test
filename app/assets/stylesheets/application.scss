@@ -15,8 +15,8 @@
  */
 
  @import 'materialize-css/sass/components/color-variables';
- $primary-color: color("blue", "lighten-2") !default;
- $secondary-color: color("blue", "base") !default;
+ $primary-color: color("teal", "lighten-2") !default;
+ $secondary-color: color("teal", "base") !default;
  @import 'materialize-css/sass/materialize';
 
  #flash_info {
@@ -27,3 +27,43 @@
 
 #flash_error {
   color: red; }
+
+.btn-floating-custom {
+  position: fixed !important;
+  right: 15px !important;
+  bottom: 25px !important;
+}
+
+.btn-add {
+  color: white;
+  background: teal;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4em;
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+  position: fixed;
+  right: 15px;
+  bottom: 25px;
+  z-index: 999;
+
+  &:focus{
+      color: white;
+      text-decoration: none; 
+  }
+  &:hover{
+      color: white;
+      text-decoration: none;
+      background: #479b47 ;
+  }
+
+  &:active {
+      color: white;
+      text-decoration: none;
+      background: #479b47;
+      box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3);
+  }
+}
