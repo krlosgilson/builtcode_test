@@ -10,18 +10,22 @@
 
 No diretório de usuário crie a seguinte árvore de pastas:
 
-`$ mkdir ~/workspace/rails_app/builtcode_test`
+`$ mkdir ~/workspace/rails_app`
 
 
-Entre na pasta criada _builtcode_test_:
+Entre na pasta criada _rails_app_:
 
-`$ cd ~/workspace/rails_app/builtcode_test `
+`$ cd ~/workspace/rails_app`
 
 ## Clonando o repositório
 
 Clone o repositório com o comando:
 
 `$ git clone git@github.com:krlosgilson/builtcode_test.git`
+
+Entre na pasta criada _builtcode_test_:
+
+`$ cd builtcode_test`
 
 ## Instalando a aplicação
 
